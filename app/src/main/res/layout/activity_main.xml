@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16.0dip"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20.0dip"
+        android:gravity="center"
+        android:text="适用于三星S20系类手机\n可实现全局120hz\n下方选项“/”前后分别对应选择对应选项后，\n调整系统设置中两选项对应的刷新率状态\n例：选择第一个选项，\n则在系统中60hz则是48hz，120hz则为全局120hz" />
+
+    <LinearLayout
+        android:layout_marginTop="30.0dip"
+        android:orientation="horizontal"
+        android:background="@null"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_gravity="start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前帧率："/>
+        <TextView
+            android:id="@+id/refreshRate"
+            android:textColor="@color/purple_700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:layout_marginTop="30.0dip"
+        android:layout_marginBottom="80.0dip">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/miui60Hz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="15.0dip"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="MIUI自带 的 60Hz" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/miui120Hz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="15.0dip"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="MIUI自带 的 120Hz" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/miuiCustom90Hz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="15.0dip"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="拓展 的 90Hz" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20.0dip"
+        android:gravity="center"
+        android:text="全局调整后系统60hz会变为48hz，\n请点击“60hz/默认120hz”以正确应用60hz"
+        android:textSize="18.0sp" />
+
+</LinearLayout>
