@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         miuiCustom90Hz.setOnClickListener((View v) -> {
-            Utils.setRefresh(this.getApplicationContext(), "96", "拓展MIUI的90Hz");
+            Utils.setRefresh(this.getApplicationContext(), "90", "拓展MIUI的90Hz");
         });
 
     }

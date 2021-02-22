@@ -4,14 +4,15 @@
     android:layout_height="match_parent"
     android:layout_margin="16.0dip"
     android:gravity="center_horizontal"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20.0dip"
+        android:layout_marginTop="40.0dip"
         android:gravity="center"
-        android:text="适用于三星S20系类手机\n可实现全局120hz\n下方选项“/”前后分别对应选择对应选项后，\n调整系统设置中两选项对应的刷新率状态\n例：选择第一个选项，\n则在系统中60hz则是48hz，120hz则为全局120hz" />
+        android:text="适用于小米11（未测试过其他设备），仅修改以下三个值：\n min_fresh_rate、peak_refresh_rate、user_refresh_rate" />
 
     <LinearLayout
         android:layout_marginTop="30.0dip"
@@ -23,21 +24,23 @@
             android:layout_gravity="start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="当前帧率："/>
+            android:text="当前APP的实时帧率："/>
         <TextView
             android:id="@+id/refreshRate"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/red"
+            tools:text="90.00"
+            android:paddingHorizontal="5.0dip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
+        android:gravity="center"
         android:orientation="vertical"
-        android:layout_marginTop="30.0dip"
+        android:layout_marginTop="50.0dip"
         android:layout_marginBottom="80.0dip">
 
             <com.google.android.material.button.MaterialButton
@@ -70,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20.0dip"
         android:gravity="center"
-        android:text="全局调整后系统60hz会变为48hz，\n请点击“60hz/默认120hz”以正确应用60hz"
+        android:text="调整后系统的设置页面也会同步修改。"
         android:textSize="18.0sp" />
 
 </LinearLayout>
