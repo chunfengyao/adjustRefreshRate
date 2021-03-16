@@ -37,7 +37,7 @@
 -keepclassmembers class * {
 void *(**On*Event);
 }
--printmapping proguardMapping.txt
+#-printmapping proguardMapping.txt
 # 屏蔽警告
 #-ignorewarnings
 # 指定混淆是采用的算法，后面的参数是一个过滤器
