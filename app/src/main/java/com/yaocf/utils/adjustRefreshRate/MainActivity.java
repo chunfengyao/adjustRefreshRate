@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 result += stringBuilder.toString()+ "\n";
             }
-            Log.d("系统设置配置", result);
+            Log.w("系统设置配置", result);
         }
 
         frameCallback = new Choreographer.FrameCallback() {
