@@ -13,13 +13,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.调节刷新率">
         <activity android:name=".MainActivity"
-            android:resizeableActivity="true">
+            android:resizeableActivity="true"
+            tools:targetApi="n"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:authorities="com.yaocf.contextProvider"
+            android:name=".ContextProvider"
+            android:exported="false" />
+
     </application>
 
 </manifest>

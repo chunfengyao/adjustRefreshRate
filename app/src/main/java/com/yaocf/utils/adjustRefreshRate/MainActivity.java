@@ -8,12 +8,15 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Choreographer;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class MainActivity extends AppCompatActivity {
     Choreographer.FrameCallback frameCallback = null;
@@ -27,6 +30,26 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton miui60Hz = findViewById(R.id.miui60Hz);
         MaterialButton miui120Hz = findViewById(R.id.miui120Hz);
         MaterialButton miuiCustom90Hz = findViewById(R.id.miuiCustom90Hz);
+        TextInputEditText customValueText = findViewById(R.id.miuiCustomValue);
+        MaterialButton customValueCommit = findViewById(R.id.miuiCustomValueCommit);
+
+
+        customValueText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                SpUtils.setCustomValue(s.toString());
+            }
+        });
 
         Cursor cursor = getContentResolver().query(Uri.parse("content://settings/system"), null, null, null, null);
 
@@ -78,6 +101,15 @@ public class MainActivity extends AppCompatActivity {
 
         miuiCustom90Hz.setOnClickListener((View v) -> {
             Utils.setRefresh(this.getApplicationContext(), "90", "拓展MIUI的90Hz");
+        });
+
+        customValueCommit.setOnClickListener((View v) -> {
+            //保证是数字
+            Integer value = Integer.valueOf(SpUtils.getCustomValue("90"));
+            String customValue = String.valueOf(value);
+            //回写
+            customValueText.setText(customValue);
+            Utils.setRefresh(this.getApplicationContext(), customValue, "自定义刷新率：" + customValue + "Hz");
         });
 
     }
