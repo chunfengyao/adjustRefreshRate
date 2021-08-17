@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@null"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="16.0dip"
@@ -35,9 +36,23 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(进入后台会停止计算实时帧率)"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20.0dip"
+        android:gravity="center"
+        android:text="调整后系统的设置页面也会同步修改。"
+        android:textSize="18.0sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@null"
         android:gravity="center"
         android:orientation="vertical"
         android:layout_marginTop="50.0dip"
@@ -47,7 +62,8 @@
                 android:id="@+id/miui60Hz"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="15.0dip"
+                android:paddingHorizontal="25.0dip"
+                android:layout_marginVertical="5.0dip"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="MIUI自带 的 60Hz" />
 
@@ -55,7 +71,8 @@
                 android:id="@+id/miui120Hz"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="15.0dip"
+                android:paddingHorizontal="25.0dip"
+                android:layout_marginVertical="5.0dip"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="MIUI自带 的 120Hz" />
 
@@ -63,17 +80,10 @@
                 android:id="@+id/miuiCustom90Hz"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="15.0dip"
+                android:paddingHorizontal="25.0dip"
+                android:layout_marginTop="25.0dip"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="拓展 的 90Hz" />
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20.0dip"
-        android:gravity="center"
-        android:text="调整后系统的设置页面也会同步修改。"
-        android:textSize="18.0sp" />
 
 </LinearLayout>
