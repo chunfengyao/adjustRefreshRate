@@ -21,7 +21,7 @@ public class Utils {
 
     public static void setRefresh(Context context, String min_refresh, String peak_refresh, String user_refresh, String name) {
         try {
-            setParameter(context, "min_fresh_rate", min_refresh, name);
+            setParameter(context, "min_fresh_rate", "60", name);
             setParameter(context, "peak_refresh_rate", peak_refresh, name);
             setParameter(context, "user_refresh_rate", user_refresh, name);
             Toast.makeText(context, "应用" + name + "成功", Toast.LENGTH_SHORT).show();
