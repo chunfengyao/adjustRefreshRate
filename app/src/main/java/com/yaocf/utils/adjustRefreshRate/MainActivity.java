@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton customValueCommit = findViewById(R.id.miuiCustomValueCommit);
         SwitchMaterial powerSaveModeSwitch = findViewById(R.id.powerSaveMode);
 
+        powerSaveModeSwitch.setChecked(SpUtils.getPowerSaveModeEnabled(true));
+
         powerSaveModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
