@@ -104,15 +104,15 @@ public class MainActivity extends AppCompatActivity {
         };
 
         miui60Hz.setOnClickListener((View v) -> {
-            Utils.setRefresh(this.getApplicationContext(), "60", "MIUI的60Hz");
+            Utils.setRefresh("60", "MIUI的60Hz");
         });
 
         miui120Hz.setOnClickListener((View v) -> {
-            Utils.setRefresh(this.getApplicationContext(), "120", "MIUI的120Hz");
+            Utils.setRefresh("120", "MIUI的120Hz");
         });
 
         miuiCustom90Hz.setOnClickListener((View v) -> {
-            Utils.setRefresh(this.getApplicationContext(), "90", "拓展MIUI的90Hz");
+            Utils.setRefresh("90", "拓展MIUI的90Hz");
         });
 
         customValueCommit.setOnClickListener((View v) -> {
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             String customValue = String.valueOf(value);
             //回写
             customValueText.setText(customValue);
-            Utils.setRefresh(this.getApplicationContext(), customValue, "自定义刷新率：" + customValue + "Hz");
+            Utils.setRefresh(customValue, "自定义刷新率：" + customValue + "Hz");
         });
 
     }
