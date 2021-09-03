@@ -10,18 +10,18 @@ package com.yaocf.utils.adjustRefreshRate;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.net.Uri;
 import android.widget.Toast;
 
 public class Utils {
     public static void setRefresh(Context context, String refresh, String name) {
-        setRefresh(context, refresh, refresh, refresh, name);
+        String minValue = SpUtils.getPowerSaveModeEnabled(true) ? "60" : refresh;
+        setRefresh(context, minValue, refresh, refresh, name);
     }
 
     public static void setRefresh(Context context, String min_refresh, String peak_refresh, String user_refresh, String name) {
         try {
-            setParameter(context, "min_fresh_rate", "60", name);
+            setParameter(context, "min_fresh_rate", min_refresh, name);
             setParameter(context, "peak_refresh_rate", peak_refresh, name);
             setParameter(context, "user_refresh_rate", user_refresh, name);
             Toast.makeText(context, "应用" + name + "成功", Toast.LENGTH_SHORT).show();

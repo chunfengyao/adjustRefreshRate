@@ -13,9 +13,11 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Choreographer;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,7 +34,14 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton miuiCustom90Hz = findViewById(R.id.miuiCustom90Hz);
         TextInputEditText customValueText = findViewById(R.id.miuiCustomValue);
         MaterialButton customValueCommit = findViewById(R.id.miuiCustomValueCommit);
+        SwitchMaterial powerSaveModeSwitch = findViewById(R.id.powerSaveMode);
 
+        powerSaveModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SpUtils.setPowerSaveModeEnabled(isChecked);
+            }
+        });
 
         customValueText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -51,23 +60,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Cursor cursor = getContentResolver().query(Uri.parse("content://settings/system"), null, null, null, null);
+        try (Cursor cursor = getContentResolver().query(Uri.parse("content://settings/system"), null, null, null, null)) {
 
-        if (BuildConfig.DEBUG && cursor != null && cursor.moveToFirst()) {
-            String result = "";
-            while (cursor.moveToNext()) {
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int i = 0; i < cursor.getColumnCount(); i++){
-                        stringBuilder
-                                .append(cursor.getColumnName(i))
-                                .append(":")
-                                .append(cursor.getString(i))
-                                .append(", ");
+            if (BuildConfig.DEBUG && cursor != null && cursor.moveToFirst()) {
+                StringBuilder result = new StringBuilder();
+                while (cursor.moveToNext()) {
+                    StringBuilder stringBuilder = new StringBuilder();
+                    for (int i = 0; i < cursor.getColumnCount(); i++) {
+                            stringBuilder
+                                    .append(cursor.getColumnName(i))
+                                    .append(":")
+                                    .append(cursor.getString(i))
+                                    .append(", ");
 
+                    }
+                    result.append(stringBuilder.toString()).append("\n");
                 }
-                result += stringBuilder.toString()+ "\n";
+                Log.w("系统设置配置", result.toString());
             }
-            Log.w("系统设置配置", result);
         }
 
         frameCallback = new Choreographer.FrameCallback() {
@@ -81,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 float diff = (frameTimeNanos - mLastFrameTime) / 1000000.0f;//得到毫秒，正常是 16.66 ms
                 if (diff > 500) {
-                    refreshRate.setText(String.valueOf(Math.round((mFrameCount * 1000L) / diff * 100) / 100.00f) + "FPS");
+                    refreshRate.setText(Math.round((mFrameCount * 1000L) / diff * 100) / 100.00f + "FPS");
                     mFrameCount = 0;
                     mLastFrameTime = 0;
                 } else {
