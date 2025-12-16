@@ -11,30 +11,33 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.Toast;
 
 public class Utils {
-    public static void setRefresh(String refresh, String name) {
-        String minValue = SpUtils.getPowerSaveModeEnabled(true) ? "60" : refresh;
-        setRefresh(minValue, refresh, refresh, name);
+    public static void setRefresh(int refresh) {
+        int minValue = SpUtils.getPowerSaveModeEnabled(true) ? 0 : refresh;
+        setRefresh(minValue, refresh);
     }
 
-    public static void setRefresh(String min_refresh, String peak_refresh, String user_refresh, String name) {
+    public static void setRefresh(int minValue, int userPreferedValue) {
         try {
-            setParameter("min_fresh_rate", min_refresh, name);
-            setParameter("peak_refresh_rate", peak_refresh, name);
-            setParameter("user_refresh_rate", user_refresh, name);
-            Toast.makeText(ContextProvider.getHoldContext(), "应用" + name + "成功", Toast.LENGTH_SHORT).show();
+            setParameter("content://settings/system","min_fresh_rate", minValue);
+            setParameter("content://settings/system","peak_refresh_rate", userPreferedValue);
+            setParameter("content://settings/secure","user_refresh_rate", userPreferedValue);
+            setParameter("content://settings/secure","miui_refresh_rate", userPreferedValue);
+            Toast.makeText(ContextProvider.getHoldContext(), "刷新率写入完成", Toast.LENGTH_SHORT).show();
         }catch (Exception e){
-            Toast.makeText(ContextProvider.getHoldContext(), "应用失败", Toast.LENGTH_SHORT).show();
+            Log.e("刷新率应用失败",e.toString());
+            Toast.makeText(ContextProvider.getHoldContext(), "刷新率使用失败\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    private static void setParameter(String key, String value, String name) {
+    private static void setParameter(String uri, String key, int value) {
         ContentResolver contentResolver = ContextProvider.getHoldContext().getContentResolver();
         ContentValues contentValues = new ContentValues(2);
         contentValues.put("name", key);
-        contentValues.put("value", value);
-        contentResolver.insert(Uri.parse("content://settings/system"), contentValues);
+        contentValues.put("value", String.valueOf(value));
+        contentResolver.insert(Uri.parse(uri), contentValues);
     }
 }

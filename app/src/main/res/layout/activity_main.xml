@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@null"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,7 +19,25 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:gravity="center"
-            android:text="仅修改以下三个值：\n min_fresh_rate、peak_refresh_rate、user_refresh_rate" />
+            android:text="仅修改以下四个值：\n（系统设置中也会跟随修改展示） \n min_fresh_rate \n peak_refresh_rate、user_refresh_rate、miui_refresh_rate" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="请先去权限管理页面授予 '修改系统设置' 权限\n然后使用adb给当前App授权（长按可以复制）："/>
+        <TextView
+            android:id="@+id/permissionGrandPrompt"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/red"
+            android:textColorHint="@color/red"
+            android:gravity="center_horizontal|center_vertical"
+            android:hint="adb shell pm grant {packageName} android.permission.WRITE_SECURE_SETTINGS"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textIsSelectable="true"
+            android:longClickable="true"/>
 
         <LinearLayout
             android:layout_marginTop="10dp"
@@ -46,13 +65,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="(进入后台会停止计算实时帧率)"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="调整后系统的设置页面也会同步修改。"
-            android:textSize="18.0sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,49 +80,66 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="节能模式(min_fresh_rate=60Hz)  "
+                android:text="节能模式(min_fresh_rate=0Hz)  "
                 android:textStyle="bold"
                 android:textColor="@color/gray"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/miui60Hz"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:paddingHorizontal="25dp"
-                android:layout_marginVertical="5dp"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="MIUI自带 的 60Hz" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/miui120Hz"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:paddingHorizontal="25dp"
-                android:layout_marginVertical="5dp"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="MIUI自带 的 120Hz" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/miuiCustom90Hz"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:paddingHorizontal="25dp"
                 android:layout_marginTop="25dp"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="拓展 的 90Hz" />
+                android:gravity="center"
+                android:text="快捷设置" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/miui60Hz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:paddingHorizontal="0dp"
+                    android:layout_marginVertical="5dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="60Hz" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/miui120Hz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:paddingHorizontal="5dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginStart="5dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="120Hz" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/miuiCustom90Hz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:paddingHorizontal="25dp"
+                    android:layout_marginStart="5dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="90Hz" />
+            </LinearLayout>
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingHorizontal="25dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/background_round_panel_light_gray"
                 android:gravity="center_horizontal|center_vertical">
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/userPreferedInput"
+                    android:visibility="gone"
+                    tools:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:focusable="true"
@@ -122,6 +151,8 @@
                         android:id="@+id/miuiCustomValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:inputType="number|textVisiblePassword"
+                        android:digits="0123456789"
                         android:textSize="15sp"
                         android:gravity="center_horizontal|center_vertical"
                         android:hint="自定义刷新率" />
@@ -131,6 +162,18 @@
                         android:textSize="15sp"
                         android:text="Hz"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/userPreferedSpinner"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:spinnerMode="dropdown"
+                    android:paddingVertical="10dp"
+                    android:paddingStart="10dp"
+                    android:prompt="@string/supportedRefreshRate"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/miuiCustomValueCommit"

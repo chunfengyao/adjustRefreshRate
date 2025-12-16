@@ -17,12 +17,12 @@ public class SpUtils {
     private final static String CUSTOM_VALUE_KEY = "customValue";
     private final static String POWER_SAVE_MODE_KEY = "PowerSaveMode";
 
-    public static String getCustomValue(String defaultValue){
-        return sharedPreferences.getString(CUSTOM_VALUE_KEY, defaultValue);
+    public static int getCustomValue(int defaultValue){
+        return sharedPreferences.getInt(CUSTOM_VALUE_KEY, defaultValue);
     }
 
-    public static void setCustomValue(String customValue){
-        editor.putString(CUSTOM_VALUE_KEY, customValue)
+    public static void setCustomValue(int customValue){
+        editor.putInt(CUSTOM_VALUE_KEY, customValue)
                 .apply();
     }
 

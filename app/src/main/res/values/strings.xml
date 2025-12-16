@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">调节刷新率</string>
+    <string name="supportedRefreshRate">当前屏幕硬件支持的刷新率</string>
 </resources>
